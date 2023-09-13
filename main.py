@@ -22,6 +22,9 @@ def euro(message):
     if message.text == '🇪🇺Курс евро💶':
         bot.send_message(chat_id=message.chat.id,
                          text='1 евро = ' + str(data['Valute']['EUR']['Value']) + ' рублей по курсу ЦБ РФ на сегодня')
+    else:
+        bot.send_message(chat_id=message.chat.id,
+                         text='Я умею выводить только курс евро по кнопке, не балуйся, ' + message.from_user.username + '!')
 
 
 bot.polling(none_stop=True)
