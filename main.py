@@ -22,7 +22,7 @@ def start(message):
 
 
 @bot.message_handler(content_types=['text'])
-def euro(message):
+def send_message(message):
     print(message.from_user.username, message.text)
     if message.text == '🇪🇺Курс евро💶':
         bot.send_message(chat_id=message.chat.id,
