@@ -2,12 +2,17 @@ import telebot
 from telebot import types
 import requests
 from background import keep_alive
+import get_rates
 
 token = "6264270259:AAGBz_RiyDBKF97Pdhq1EN1Iq77BNUKXyG4"
 
-data = requests.get("https://www.cbr-xml-daily.ru/daily_json.js").json()
 bot = telebot.TeleBot(token)
 botname = ["@PistsovBot"]
+
+eur = str(get_rates.fetch_eur())
+usd = str(get_rates.fetch_usd())
+eur_text = "1 евро = " + eur + " рублей по курсу ЦБ РФ на сегодня"
+usd_text = "1 доллар = " + usd + " рублей по курсу ЦБ РФ на сегодня"
 
 
 @bot.message_handler(commands=["start"])
@@ -27,11 +32,9 @@ def start(message):
 def send_message(message):
     print(message.chat.id, message.from_user.username, message.text)
     if message.text == "🇪🇺Курс евро💶":
-        bot.send_message(chat_id=message.chat.id,
-                         text="1 евро = " + str(data["Valute"]["EUR"]["Value"]) + " рублей по курсу ЦБ РФ на сегодня")
+        bot.send_message(chat_id=message.chat.id, text=eur_text)
     elif message.text == "🇺🇸Курс доллара💵":
-        bot.send_message(chat_id=message.chat.id,
-                         text="1 доллар = " + str(data["Valute"]["USD"]["Value"]) + " рублей по курсу ЦБ РФ на сегодня")
+        bot.send_message(chat_id=message.chat.id, text=usd_text)
     elif message.text == "❤️":
         bot.send_message(chat_id=message.chat.id,
                          text="@" + message.from_user.username + ", ты просто прелесть!😘💋")
