@@ -1,6 +1,5 @@
 import requests
-from aiohttp import ClientSession
-import asyncio
+
 
 rates_url = 'https://www.cbr-xml-daily.ru/daily_json.js'
 
