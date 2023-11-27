@@ -28,23 +28,13 @@ async def async_main():
     eur, usd = await asyncio.gather(
         fetch_eur(),
         fetch_usd())
-    print(eur, usd)
     return eur, usd
 
 
 def main():
     eur, usd = asyncio.run(async_main())
+    print(eur, usd)
     return eur, usd
-
-
-# async def fetch_valutes() -> dict:
-#     data: dict = await fetch_json(rates_url)
-#     return data
-#
-#
-# def main():
-#     data = asyncio.run(fetch_valutes())
-#     return data
 
 
 if __name__ == '__main__':
